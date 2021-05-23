@@ -1,0 +1,431 @@
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 30vmin;
+  margin-bottom: 50px;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  outline: none;
+  color: #61dafb;
+  cursor: pointer;
+}
+
+.App-link:hover {
+  text-decoration: underline;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+section.PianoGame {
+  margin-left: 266px;
+  margin-right: 266px;
+}
+
+section.Set {
+  height: 200px;
+  width: 834px;
+  padding: 0;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+}
+
+section.Set ul.White-keys {
+  padding-left: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+section.Set ul.Black-keys {
+  padding-left: 26px;
+  position: absolute;
+  z-index: 1;
+}
+
+ul.White-keys li {
+  padding-top: 150px;
+  height: 180px;
+  width: 35.5px;
+  border-left: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  border-radius: 0 0 5px 5px;
+  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.8) inset, 0 0 5px #ccc inset,
+    0 0 3px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #eee 0%, #fff 100%);
+  color: rgba(0, 0, 0, 0.2);
+}
+
+ul.Black-keys li {
+  padding-top: 0px;
+  height: 100px;
+  width: 20px;
+  border: 1px solid #000;
+  border-radius: 0 0 5px 5px;
+  box-shadow: -1px -1px 2px rgba(255, 255, 255, 0.2) inset,
+    0 -5px 2px 3px rgba(0, 0, 0, 0.6) inset, 0 2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(45deg, #222 0%, #555 100%);
+  font-size: 0.8em;
+  color: whitesmoke;
+}
+
+ul.White-keys li.Active {
+  border-top: 1px solid #777;
+  border-left: 1px solid #999;
+  border-bottom: 1px solid #999;
+  box-shadow: 2px 0 3px rgba(0, 0, 0, 0.1) inset,
+    -5px 5px 20px rgba(0, 0, 0, 0.2) inset, 0 0 3px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #fff 0%, #e9e9e9 100%);
+}
+
+ul.White-keys li.Left-hand.Active {
+  background: rgb(63, 270, 227);
+}
+
+ul.White-keys li.Right-hand.Active {
+  background: rgb(166, 234, 114);
+}
+
+ul.Black-keys li.Active {
+  box-shadow: -1px -1px 2px rgba(255, 255, 255, 0.2) inset,
+    0 -2px 2px 3px rgba(0, 0, 0, 0.6) inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to right, #444 0%, #222 100%);
+}
+
+ul.White-keys li:first-child {
+  border-radius: 5px 0 5px 5px;
+}
+
+ul.White-keys li:last-child {
+  border-radius: 0 5px 5px 5px;
+}
+
+ul.Black-keys li:nth-child(2),
+ul.Black-keys li:nth-child(3),
+ul.Black-keys li:nth-child(5),
+ul.Black-keys li:nth-child(7),
+ul.Black-keys li:nth-child(8),
+ul.Black-keys li:nth-child(10),
+ul.Black-keys li:nth-child(12),
+ul.Black-keys li:nth-child(13),
+ul.Black-keys li:nth-child(15),
+ul.Black-keys li:nth-child(17),
+ul.Black-keys li:nth-child(18),
+ul.Black-keys li:nth-child(20),
+ul.Black-keys li:nth-child(22),
+ul.Black-keys li:nth-child(23),
+ul.Black-keys li:nth-child(25) {
+  margin-left: 15.5px;
+}
+
+ul.Black-keys li:nth-child(4),
+ul.Black-keys li:nth-child(9),
+ul.Black-keys li:nth-child(11),
+ul.Black-keys li:nth-child(14),
+ul.Black-keys li:nth-child(16),
+ul.Black-keys li:nth-child(19),
+ul.Black-keys li:nth-child(21),
+ul.Black-keys li:nth-child(24) {
+  margin-left: 51.5px;
+}
+
+ul.Black-keys li:nth-child(6) {
+  margin-left: 50px;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  float: left;
+  text-align: center;
+}
+
+li span {
+  pointer-events: none;
+}
+
+.a, .g, .f, .d, .c {
+  margin: 0;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 599px) {
+  section.PianoGame {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  section.Set {
+    padding: 0px;
+    left: 0px;
+  }
+  ul.White-keys li {
+    width: 20.9px;
+  }
+  ul.Black-keys li {
+    width: 15px;
+  }
+  section.Set ul.Black-keys {
+    padding-left: 13px;
+  }
+  ul.Black-keys li:nth-child(2),
+  ul.Black-keys li:nth-child(3),
+  ul.Black-keys li:nth-child(5),
+  ul.Black-keys li:nth-child(7),
+  ul.Black-keys li:nth-child(8),
+  ul.Black-keys li:nth-child(10),
+  ul.Black-keys li:nth-child(12),
+  ul.Black-keys li:nth-child(13),
+  ul.Black-keys li:nth-child(15),
+  ul.Black-keys li:nth-child(17),
+  ul.Black-keys li:nth-child(18),
+  ul.Black-keys li:nth-child(20),
+  ul.Black-keys li:nth-child(22),
+  ul.Black-keys li:nth-child(23),
+  ul.Black-keys li:nth-child(25) {
+    margin-left: 8px;
+  }
+
+  ul.Black-keys li:nth-child(4),
+  ul.Black-keys li:nth-child(9),
+  ul.Black-keys li:nth-child(11),
+  ul.Black-keys li:nth-child(14),
+  ul.Black-keys li:nth-child(16),
+  ul.Black-keys li:nth-child(19),
+  ul.Black-keys li:nth-child(21),
+  ul.Black-keys li:nth-child(24) {
+    margin-left: 23px;
+  }
+  ul.Black-keys li:nth-child(6) {
+    margin-left: 25px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and 767px) */
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+  section.PianoGame {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  section.Set {
+    padding: 0px;
+    left: 0px;
+  }
+  ul.White-keys li {
+    width: 28.5px;
+  }
+  ul.Black-keys li {
+    width: 20px;
+  }
+  section.Set ul.Black-keys {
+    padding-left: 18px;
+  }
+  ul.Black-keys li:nth-child(2),
+  ul.Black-keys li:nth-child(3),
+  ul.Black-keys li:nth-child(5),
+  ul.Black-keys li:nth-child(7),
+  ul.Black-keys li:nth-child(8),
+  ul.Black-keys li:nth-child(10),
+  ul.Black-keys li:nth-child(12),
+  ul.Black-keys li:nth-child(13),
+  ul.Black-keys li:nth-child(15),
+  ul.Black-keys li:nth-child(17),
+  ul.Black-keys li:nth-child(18),
+  ul.Black-keys li:nth-child(20),
+  ul.Black-keys li:nth-child(22),
+  ul.Black-keys li:nth-child(23),
+  ul.Black-keys li:nth-child(25) {
+    margin-left: 10px;
+  }
+
+  ul.Black-keys li:nth-child(4),
+  ul.Black-keys li:nth-child(6),
+  ul.Black-keys li:nth-child(11),
+  ul.Black-keys li:nth-child(14),
+  ul.Black-keys li:nth-child(16),
+  ul.Black-keys li:nth-child(19),
+  ul.Black-keys li:nth-child(21),
+  ul.Black-keys li:nth-child(24) {
+    margin-left: 35px;
+  }
+  ul.Black-keys li:nth-child(9) {
+    margin-left: 33px;
+  }
+}
+
+/* Medium devices (landscape tablets, between 768px and 991px) */
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+  section.PianoGame {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  section.Set {
+    padding: 0;
+    left: 50px;
+  }
+  section.Set ul.Black-keys {
+    padding-left: 26px;
+  }
+  ul.White-keys li {
+    width: 36px;
+  }
+  ul.Black-keys li {
+    width: 20px;
+  }
+  ul.Black-keys li:nth-child(2),
+  ul.Black-keys li:nth-child(3),
+  ul.Black-keys li:nth-child(5),
+  ul.Black-keys li:nth-child(7),
+  ul.Black-keys li:nth-child(8),
+  ul.Black-keys li:nth-child(10),
+  ul.Black-keys li:nth-child(12),
+  ul.Black-keys li:nth-child(13),
+  ul.Black-keys li:nth-child(15),
+  ul.Black-keys li:nth-child(17),
+  ul.Black-keys li:nth-child(18),
+  ul.Black-keys li:nth-child(20),
+  ul.Black-keys li:nth-child(22),
+  ul.Black-keys li:nth-child(23),
+  ul.Black-keys li:nth-child(25) {
+    margin-left: 16.5px;
+  }
+  ul.Black-keys li:nth-child(4),
+  ul.Black-keys li:nth-child(9),
+  ul.Black-keys li:nth-child(11),
+  ul.Black-keys li:nth-child(14),
+  ul.Black-keys li:nth-child(16),
+  ul.Black-keys li:nth-child(19),
+  ul.Black-keys li:nth-child(21),
+  ul.Black-keys li:nth-child(24) {
+    margin-left: 52px;
+  } 
+  ul.Black-keys li:nth-child(6) {
+    margin-left: 50px;
+  }
+}
+
+/* Large devices (laptops/desktops, between 992px and 1199px) */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  section.PianoGame {
+    margin-left: 120px;
+    margin-right: 120px;
+  }
+  section.Set {
+    padding: 0;
+    left: 120px;
+  }
+  section.Set ul.Black-keys {
+    padding-left: 26.5px;
+  }
+  ul.White-keys li {
+    width: 35.9px;
+  }
+  ul.Black-keys li {
+    width: 20px;
+  }
+  ul.Black-keys li:nth-child(2),
+  ul.Black-keys li:nth-child(3),
+  ul.Black-keys li:nth-child(5),
+  ul.Black-keys li:nth-child(7),
+  ul.Black-keys li:nth-child(8),
+  ul.Black-keys li:nth-child(10),
+  ul.Black-keys li:nth-child(12),
+  ul.Black-keys li:nth-child(13),
+  ul.Black-keys li:nth-child(15),
+  ul.Black-keys li:nth-child(17),
+  ul.Black-keys li:nth-child(18),
+  ul.Black-keys li:nth-child(20),
+  ul.Black-keys li:nth-child(22),
+  ul.Black-keys li:nth-child(23),
+  ul.Black-keys li:nth-child(25) {
+    margin-left: 15.5px;
+  }
+  ul.Black-keys li:nth-child(4),
+  ul.Black-keys li:nth-child(9),
+  ul.Black-keys li:nth-child(11),
+  ul.Black-keys li:nth-child(14),
+  ul.Black-keys li:nth-child(16),
+  ul.Black-keys li:nth-child(19),
+  ul.Black-keys li:nth-child(21),
+  ul.Black-keys li:nth-child(24) {
+    margin-left: 52px;
+  } 
+  ul.Black-keys li:nth-child(6) {
+    margin-left: 53px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  section.PianoGame {
+    margin-left: 266px;
+    margin-right: 266px;
+  }
+  section.Set {
+    left: 266px;
+  }
+  section.Set ul.Black-keys {
+    padding-left: 26px;
+  }
+  ul.White-keys li {
+    width: 36px;
+  }
+  ul.Black-keys li {
+    width: 20px;
+  }
+  ul.White-keys li:first-child {
+    border-radius: 5px 0 5px 5px;
+  }
+  ul.Black-keys li:nth-child(2),
+  ul.Black-keys li:nth-child(3),
+  ul.Black-keys li:nth-child(5),
+  ul.Black-keys li:nth-child(7),
+  ul.Black-keys li:nth-child(8),
+  ul.Black-keys li:nth-child(10),
+  ul.Black-keys li:nth-child(12),
+  ul.Black-keys li:nth-child(13),
+  ul.Black-keys li:nth-child(15),
+  ul.Black-keys li:nth-child(17),
+  ul.Black-keys li:nth-child(18),
+  ul.Black-keys li:nth-child(20),
+  ul.Black-keys li:nth-child(22),
+  ul.Black-keys li:nth-child(23),
+  ul.Black-keys li:nth-child(25) {
+    margin-left: 16.5px;
+  }
+  ul.Black-keys li:nth-child(4),
+  ul.Black-keys li:nth-child(9),
+  ul.Black-keys li:nth-child(11),
+  ul.Black-keys li:nth-child(14),
+  ul.Black-keys li:nth-child(16),
+  ul.Black-keys li:nth-child(19),
+  ul.Black-keys li:nth-child(21),
+  ul.Black-keys li:nth-child(24) {
+    margin-left: 52.5px;
+  } 
+  ul.Black-keys li:nth-child(6) {
+    margin-left: 51px;
+  }
+}

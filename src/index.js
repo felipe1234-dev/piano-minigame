@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './styles/index.css';
+import './styles/App.css';
+import App from './components/App.jsx';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
