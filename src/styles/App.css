@@ -172,11 +172,11 @@ li span {
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 599px) {
-  /*section.PianoGame {
+/*@media only screen and (max-width: 599px) {
+  section.PianoGame {
     margin-left: 0px;
     margin-right: 0px;
-  }*/
+  }
   section.Set {
     padding: 0px;
     left: 0px;
@@ -221,14 +221,14 @@ li span {
   ul.Black-keys li:nth-child(6) {
     margin-left: 25px;
   }
-}
+}*/
 
 /* Small devices (portrait tablets and large phones, 600px and 767px) */
-@media only screen and (min-width: 600px) and (max-width: 767px) {
-  /*section.PianoGame {
+/*@media only screen and (min-width: 600px) and (max-width: 767px) {
+  section.PianoGame {
     margin-left: 20px;
     margin-right: 20px;
-  }*/
+  }
   section.Set {
     padding: 0px;
     left: 0px;
@@ -276,11 +276,11 @@ li span {
 }
 
 /* Medium devices (landscape tablets, between 768px and 991px) */
-@media only screen and (min-width: 768px) and (max-width: 991px) { 
-  /*section.PianoGame {
+/*@media only screen and (min-width: 768px) and (max-width: 991px) { 
+  section.PianoGame {
     margin-left: 50px;
     margin-right: 50px;
-  }*/
+  }
   section.Set {
     padding: 0;
     left: 50px;
@@ -327,11 +327,11 @@ li span {
 }
 
 /* Large devices (laptops/desktops, between 992px and 1199px) */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  /*section.PianoGame {
+/*@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  section.PianoGame {
     margin-left: 120px;
     margin-right: 120px;
-  }*/
+  }
   section.Set {
     padding: 0;
     left: 120px;
@@ -375,14 +375,14 @@ li span {
   ul.Black-keys li:nth-child(6) {
     margin-left: 53px;
   }
-}
+}*/
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  /*section.PianoGame {
+/*@media only screen and (min-width: 1200px) {
+  section.PianoGame {
     margin-left: 266px;
     margin-right: 266px;
-  }*/
+  }
   section.Set {
     left: 266px;
   }
@@ -428,4 +428,4 @@ li span {
   ul.Black-keys li:nth-child(6) {
     margin-left: 51px;
   }
-}
+}*/
