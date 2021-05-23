@@ -1,11 +1,10 @@
 import React from "react";
-import Notes from "./Notes.jsx";
 import makeResponsive from "./makeResponsive.jsx";
-
+import Notes from "./Notes.jsx";
 
 class FallingNotes extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.updateCanvasArea = this.updateCanvasArea.bind(this); 
         const component = this; 
@@ -20,6 +19,8 @@ class FallingNotes extends React.Component {
                 /* Each one is a block and will fall at the exact same time the note shold be pressed 
                 to produce the song. - Cada uma é um bloco e vai cair exatamente no mesmo tempo em que a nota 
                 deve ser pressionada para produzir a música. */
+                this.canvas.current.width = window.innerWidth;
+                this.canvas.current.height = window.innerHeight;
                 this.interval = setInterval(component.updateCanvasArea, 20);
             },
             clear : function() {
@@ -84,7 +85,7 @@ class FallingNotes extends React.Component {
             handleAutoNotes
         } = this;
 
-        let screen = makeResponsive();
+        const screen = makeResponsive();
         canvasArea.canvas.current.width = screen.canvasArea.width;
         canvasArea.canvas.current.height = screen.canvasArea.height;
 

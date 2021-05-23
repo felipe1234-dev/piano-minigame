@@ -24,62 +24,59 @@ CanvasRenderingContext2D.prototype.fillRect = function (x, y, width, height, rad
 }
 
 function note2Pos(note) {
-    const screen = makeResponsive();
-
-    const incr = screen.fallingNotes.incr;
-    const mrgLeft = screen.fallingNotes.mrgLeft; 
+    let incr = 35.6;
 
     switch(note) {
         case 'C3':
-            return (mrgLeft + 0*incr);
+            return (291 + 0*incr);
         case 'D3':
-            return (mrgLeft + 1*incr);
+            return (291 + 1*incr);
         case 'E3':
-            return (mrgLeft + 2*incr);
+            return (291 + 2*incr);
         case 'F3':
-            return (mrgLeft + 3*incr);
+            return (291 + 3*incr);
         case 'G3':
-            return (mrgLeft + 4*incr);
+            return (291 + 4*incr);
         case 'A3':
-            return (mrgLeft + 5*incr);
+            return (291 + 5*incr);
         case 'B3':
-            return (mrgLeft + 6*incr);
+            return (291 + 6*incr);
 
         case 'C4':
-            return (mrgLeft + 7*incr);
+            return (291 + 7*incr);
         case 'D4':
-            return (mrgLeft + 8*incr);
+            return (291 + 8*incr);
         case 'E4':
-            return (mrgLeft + 9*incr);
+            return (291 + 9*incr);
         case 'F4':
-            return (mrgLeft + 10*incr);
+            return (291 + 10*incr);
         case 'G4':
-            return (mrgLeft + 11*incr);
+            return (291 + 11*incr);
         case 'A4':
-            return (mrgLeft + 12*incr);
+            return (291 + 12*incr);
         case 'B4':
-            return (mrgLeft + 13*incr);
+            return (291 + 13*incr);
         
         case 'C5':
-            return (mrgLeft + 14*incr);
+            return (291 + 14*incr);
         case 'D5':
-            return (mrgLeft + 15*incr);
+            return (291 + 15*incr);
         case 'E5':
-            return (mrgLeft + 16*incr);
+            return (291 + 16*incr);
         case 'F5':
-            return (mrgLeft + 17*incr);
+            return (291 + 17*incr);
         case 'G5':
-            return (mrgLeft + 18*incr);
+            return (291 + 18*incr);
         case 'A5':
-            return (mrgLeft + 19*incr);
+            return (291 + 19*incr);
         case 'B5':
-            return (mrgLeft + 20*incr);
+            return (291 + 20*incr);
 
         case 'C6':
-            return (mrgLeft + 21*incr);
+            return (291 + 21*incr);
 
         default:
-            return mrgLeft;
+            return 291;
     }
 }
 
@@ -94,6 +91,7 @@ function Notes(notes, interval, index, canvasArea) {
     this.interval = interval;
 
     const screen = makeResponsive();
+
     this.left = {
         note: noteL,
         width: screen.fallingNotes.key.white.width,
