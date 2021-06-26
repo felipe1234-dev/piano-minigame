@@ -49,7 +49,7 @@ class FallingTiles extends React.Component {
         const { songSheet } = this.props;
         this.setState({ songSheet: songSheet });
 
-        /*const { onFallCallBack } = this;
+        const { onFallCallBack } = this;
         const { fallDuration   } = this.state;
 
         Object.keys(songSheet).forEach(side => {
@@ -61,15 +61,13 @@ class FallingTiles extends React.Component {
                 );
             });
 
-        });*/
+        });
     }
 
     componentDidUpdate(prevProps, prevState) {
         const currState = JSON.stringify(this.state.sequenceIndex);
         prevState       = JSON.stringify(prevState.sequenceIndex);
-        console.log("did update");
-        console.log(prevState);
-        console.log(currState);
+        
         if (currState !== prevState) {
             const { songSheet, endGame } = this.props;
 
