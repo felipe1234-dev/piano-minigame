@@ -1,5 +1,6 @@
 import React from "react";
-import songlist from "../piano-songs/songlist.jsx";
+import songList from "../piano-songs/songList.jsx";
+import pianoList from "../piano-notes/pianoList.jsx";
 import { 
     Form, 
     Modal, 
@@ -7,57 +8,54 @@ import {
     Icon,
     Button
 } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 
 class GameSettings extends React.Component {
     constructor() {
         super();
         this.state = {
             speed: 1,
-            helpingHand: "none", 
-            song: null, 
-            player: null
+            helpingHand: "left", 
+            song: null,
+            piano: null
         };
     }
     
     /* Checks if all form fields have been filled out. - Checa se 
     todos os campos do formulário foram preenchidos. */
-    validate = () => {
-        const { song, player, helpingHand } = this.state;
-
-        return (helpingHand !== "both")?(
-            (player !== null && player !== '' && song != null && song !== '')
-        ) : (
-            (song != null && song !== '')
-        );
-    }
-
+    validate = () => (
+        (this.state.player !== "") && (this.state.player !== null) 
+        && (this.state.song !== "" && this.state.song !== null)
+    );
+              
     setSong = song => this.setState({ song: song.trim() });
 
     setSpeed = speed => this.setState({ speed: parseFloat(speed) });
 
     setHelpingHand = helpingHand => this.setState({ helpingHand: helpingHand });
 
-    setPlayer = player => this.setState({ player: player.trim() });
+    setPiano = piano => this.setState({ piano: piano });
 
     render() {
         const { 
             close,    
-            start
+            start,
+            tr
         } = this.props;
         
         const {
             song, 
             speed, 
             helpingHand,
-            player
+            piano
         } = this.state;
 
         const {
-            validate,
             setSong,
+            validate,
             setSpeed, 
             setHelpingHand,
-            setPlayer
+            setPiano
         } = this;
 
         return (
@@ -69,69 +67,62 @@ class GameSettings extends React.Component {
             >
                 <Header icon>
                     <Icon name="setting" />
-                    Configurações do jogo
+                    {tr("Configurações do jogo")}
                 </Header>
                 <Modal.Content>
                     <Form inverted>
+                        {/* Song name and piano model */}
                         <Form.Group widths="equal">
-                            {(helpingHand !== "both")? (
-                                (player === '')? (
-                                    <Form.Input 
-                                        fluid 
-                                        label="Nome (Não seu nome real)" 
-                                        placeholder="Nome"
-                                        onChange={(e, { value }) => setPlayer(value)} 
-                                        error={{
-                                            content: 'Por favor, insira seu nome',
-                                            pointing: 'below'
-                                        }}
-                                    />
-                                ) : (
-                                    <Form.Input 
-                                        fluid 
-                                        label="Nome (Não seu nome real)" 
-                                        placeholder="Nome"
-                                        onChange={(e, { value }) => setPlayer(value)} 
-                                    />
-                                )
-                            ) : (
-                                <Form.Input 
-                                    fluid 
-                                    label="Nome (Não seu nome real)" 
-                                    placeholder="Nome"
-                                    disabled
-                                    value="" 
-                                />
-                            )}
-                            {(song === '')? (
+                            {(piano === "")? (
                                 <Form.Select
                                     fluid
-                                    options={songlist}
-                                    label="Melodia/Música"
-                                    placeholder="Escolha uma música para tocar"
-                                    onChange={(e, { value }) => setSong(value)}
+                                    options={pianoList}
+                                    label={tr("Modelo do piano")}
+                                    placeholder={tr("Escolha um piano para tocar")}
+                                    onChange={(e, { value }) => setPiano(value)}
                                     error={{
-                                        content: 'Por favor, escolha uma música da lista de músicas',
-                                        pointing: 'below',
+                                        content: tr("Por favor, escolha um piano que mais goste"),
+                                        pointing: "below",
                                     }}
                                 />
                             ) : (
                                 <Form.Select
                                     fluid
-                                    options={songlist}
-                                    label="Melodia/Música"
-                                    placeholder="Escolha uma música para tocar"
+                                    options={pianoList}
+                                    label={tr("Modelo do piano")}
+                                    placeholder={tr("Escolha um piano para tocar")}
+                                    onChange={(e, { value }) => setPiano(value)}
+                                />
+                            )}
+                            {(song === "")? (
+                                <Form.Select
+                                    fluid
+                                    options={songList}
+                                    label={tr("Melodia/Música")}
+                                    placeholder={tr("Escolha uma música para tocar")}
+                                    onChange={(e, { value }) => setSong(value)}
+                                    error={{
+                                        content: tr("Por favor, escolha uma música da lista de músicas"),
+                                        pointing: "below",
+                                    }}
+                                />
+                            ) : (
+                                <Form.Select
+                                    fluid
+                                    options={songList}
+                                    label={tr("Melodia/Música")}
+                                    placeholder={tr("Escolha uma música para tocar")}
                                     onChange={(e, { value }) => setSong(value)}
                                 />
                             )}
                         </Form.Group>
-
+                        {/* Song speed */}
                         <Form.Group inline>
-                            <label>Velocidade</label>
+                            <label>{tr("Velocidade")}</label>
                             <Form.Radio
-                                label="Lenta"
-                                value="1.2"
-                                checked={speed === 1.2}
+                                label={tr("Lenta")}
+                                value="2"
+                                checked={speed === 2}
                                 onChange={(e, { value }) => setSpeed(value)}
                             />
                             <Form.Radio
@@ -141,35 +132,29 @@ class GameSettings extends React.Component {
                                 onChange={(e, { value }) => setSpeed(value)}
                             />
                             <Form.Radio
-                                label="Rápida"
-                                value="0.8"
-                                checked={speed === 0.8}
+                                label={tr("Rápida")}
+                                value="0.1"
+                                checked={speed === 0.1}
                                 onChange={(e, { value }) => setSpeed(value)}
                             />
                         </Form.Group>
-                        
+                        {/* Helping hand */ }
                         <Form.Group inline>
-                            <label>Mão ajudante</label>
+                            <label>{tr("Mão ajudante")}</label>
                             <Form.Radio
-                                label="Esquerda"
+                                label={tr("Esquerda")}
                                 value="left"
                                 checked={helpingHand === "left"}
                                 onChange={(e, { value }) => setHelpingHand(value)}
                             />
                             <Form.Radio
-                                label="Direita"
+                                label={tr("Direita")}
                                 value="right"
                                 checked={helpingHand === "right"}
                                 onChange={(e, { value }) => setHelpingHand(value)}
                             />
                             <Form.Radio
-                                label="Nenhuma"
-                                value="none"
-                                checked={helpingHand === "none"}
-                                onChange={(e, { value }) => setHelpingHand(value)}
-                            />
-                            <Form.Radio
-                                label="Ambas"
+                                label={tr("Ambas")}
                                 value="both"
                                 checked={helpingHand === "both"}
                                 onChange={(e, { value }) => setHelpingHand(value)}
@@ -178,23 +163,22 @@ class GameSettings extends React.Component {
                     </Form>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button 
-                        basic 
+                    <Button
                         inverted
-                        color="red"  
+                        color="red"
                         onClick={() => close()}
                     >
-                        <Icon name="remove" /> Fechar
+                        <Icon name="remove" /> {tr("Fechar")}
                     </Button>
-                    <Button 
-                        color={(validate())? "green" : "yellow"} 
-                        inverted 
+                    <Button
+                        inverted
+                        color={(validate())? "green" : "yellow"}
                         onClick={() => (validate())? ( 
-                            start(speed, helpingHand, song, player) 
+                            start(speed, helpingHand, song, piano) 
                         ) : null}
                     >
                         <Icon name={(validate())? "checkmark" : "lock"} /> 
-                        {(validate())? 'Começar o jogo' : 'Preencha os campos'}
+                        {(validate())? tr("Começar o jogo") : tr("Preencha os campos")}
                     </Button>
                 </Modal.Actions>
             </Modal>

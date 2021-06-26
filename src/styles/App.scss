@@ -1,0 +1,453 @@
+@import "mixins";
+@import "variables";
+@import "functions";
+@import "extend";
+
+.App {
+    .hidden {
+        display: none;
+    }
+
+    .navbar-brand {
+        padding: 18px 20px;
+        display: inline-block;
+    }
+
+    .App-header {
+        min-height     : 90vh;
+        display        : flex;
+        flex-direction : column;
+        align-items    : center;
+        justify-content: center;
+        font-size      : calc(10px + 2vmin);
+        color          : white;
+
+        .App-logo {
+            @include animation(App-logo-spin infinite 20s linear);
+            height       : 30vmin;
+            margin-bottom: 50px;
+        }
+        
+        .App-link {
+            background     : none;
+            border         : none;
+            padding        : 0;
+            text-decoration: none;
+            outline        : none;
+            color          : #61dafb;
+            cursor         : pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        @keyframes App-logo-spin {
+            from {
+                transform: rotate(0deg);
+            }
+        
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    }
+
+    .piano-game {
+        
+        div[data-quadrant] {
+            display: inline-block;
+
+            .key {
+                margin       : 0;
+                padding      : 0;
+                display      : inline-block;
+                position     : relative;
+                text-align   : center;
+                border-radius: 0 0 5px 5px;
+
+                span {
+                    @include user-select(none);
+                    pointer-events: none;
+                }
+            }
+
+            .glow {
+                margin    : 0;
+                padding   : 0;
+                display   : inline-block;
+                position  : relative;
+                background: transparent;
+
+                &:before {
+                    content   : "";
+                    position  : absolute;
+                    top       : 0px;
+                    left      : 0;
+                    width     : 100%;
+                    height    : 100%;
+                    transition: .3s;
+                    transform : scale(0);
+                    z-index   : 0;
+                }
+            }
+        }
+
+        .falling-tiles {
+            height: 400px;
+
+            .tile {
+                display   : inline-block;
+                text-align: center;
+                position  : absolute;
+                top       : 0;
+                
+                &.left {
+                    &.black-key {
+                        background-color: map-deep-get($black-key, colors, left-hand, full-opacity);
+                    }
+
+                    &.white-key {
+                        background-color: map-deep-get($white-key, colors, left-hand, full-opacity);
+                    }
+                }
+
+                &.right {
+                    &.black-key {
+                        background-color: map-deep-get($black-key, colors, right-hand, full-opacity);
+                    }
+
+                    &.white-key {
+                        background-color: map-deep-get($white-key, colors, right-hand, full-opacity);
+                    }
+                }
+            }
+        } 
+
+        .glow-effects {
+            @extend .transparent-scrollbar;
+            @extend .x-scrollable-container;
+            position: absolute;
+            top     : 390px; 
+            left    : 0; 
+            width   : 100%; 
+            height  : 50px;
+            padding : 0 0 0 map-get($set, "padding-left");    
+
+            .white-keys-glow {
+                @extend .transparent-scrollbar;
+                position: relative;
+                padding : 0;
+                width   : 100%;
+                height  : 100%;
+
+                .glow {
+                    height: 50px;
+                    width : map-get($white-key, key-width);
+
+                    &.active {
+                        &.left-hand {
+                            &:before { 
+                                @include linear-gradient(
+                                    to top, 
+                                    map-deep-get($white-key, colors, left-hand, full-opacity), 
+                                    map-deep-get($white-key, colors, left-hand, zero-opacity)
+                                ); 
+                            }
+                        }
+        
+                        &.right-hand {
+                            &:before { 
+                                @include linear-gradient(
+                                    to top, 
+                                    map-deep-get($white-key, colors, right-hand, full-opacity), 
+                                    map-deep-get($white-key, colors, right-hand, zero-opacity)
+                                ); 
+                            }
+                        }
+
+                        &:before {
+                            transform: scale(1);
+                            filter   : blur(3px);
+                        }
+                    }
+                }
+            }
+
+            .black-keys-glow {
+                @extend .transparent-scrollbar;
+                @extend .x-scrollable-container;
+                padding : 0;
+                width   : 100%;
+                height  : 100%;
+                position: absolute;
+                z-index : 4;
+
+                .glow {
+                    height: 100%;
+                    width : map-get($black-key, key-width);
+
+                    &.active {
+                        &.left-hand {
+                            &:before { 
+                                @include linear-gradient(
+                                    to top, 
+                                    map-deep-get($black-key, colors, left-hand, full-opacity), 
+                                    map-deep-get($black-key, colors, left-hand, zero-opacity)
+                                );
+                            }
+                        }
+
+                        &.right-hand {
+                            &:before { 
+                                @include linear-gradient(
+                                    to top, 
+                                    map-deep-get($black-key, colors, right-hand, full-opacity), 
+                                    map-deep-get($black-key, colors, right-hand, zero-opacity)
+                                ); 
+                            }
+                        }
+                        
+                        &:before {
+                            transform: scale(1);
+                            filter   : blur(3px);
+                        }
+                    }
+                }
+
+                div {
+                    &[data-quadrant="1"] .glow {
+                        &:first-child {
+                            margin-left: 45px;
+                        }
+                    
+                        &:nth-child(2), &:nth-child(3), &:last-child {
+                            margin-left: 31px;
+                        }
+                        
+                        &:nth-child(4) {
+                            margin-left: 90px;
+                        }
+                    }
+                        
+                    &[data-quadrant="2"] .glow {
+                        &:first-child {
+                            margin-left: 88px;
+                        }
+                        
+                        &:nth-child(2), &:nth-child(3), &:last-child {
+                            margin-left: 31px;
+                        }
+                        
+                        &:nth-child(4) {
+                            margin-left: 88px;
+                        }
+                    }
+                        
+                    &[data-quadrant="3"] .glow {
+                        &:first-child {
+                            margin-left: 90px;
+                        }
+                        
+                        &:nth-child(2), &:nth-child(3), &:last-child {
+                            margin-left: 31px;
+                        }
+                        
+                        &:nth-child(4) {
+                            margin-left: 90px;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .piano-keyboard {
+            @extend .transparent-scrollbar;
+            @extend .x-scrollable-container;
+            height : 200px;
+            width  : 100%;
+            padding: 0;
+
+            .set {
+                @include linear-gradient(
+                    to bottom right, 
+                    rgba(0, 0, 0, 0.3), 
+                    rgba(0, 0, 0, 0)
+                );
+                height          : 175px;
+                width           : 1325px;
+                padding         : 0 0 0 map-get($set, "padding-left");
+                border          : 1px solid #160801;
+                border-radius   : 16px;
+                background-image: url(map-get($set, bg-img));
+                box-shadow      : 
+                    0 0 50px rgba(0, 0, 0, 0.5) inset, 
+                    0 1px rgba(212, 152, 125, 0.2) inset, 
+                    0 5px 15px rgba(0, 0, 0, 0.5)
+                ;
+                position        : relative;
+                z-index         : 0;
+
+                .white-keys {
+                    @extend .transparent-scrollbar;
+                    position: relative;
+                    padding : 0;
+                    width   : 100%;
+                    height  : 190px;
+        
+                    .key {
+                        @include linear-gradient(
+                            to bottom,
+                            #eee 0%, 
+                            #fff 100%
+                        );
+                        padding-top  : 150px;
+                        height       : map-get($white-key, key-height);
+                        width        : map-get($white-key, key-width);
+                        border-left  : 1px solid #bbb;
+                        border-bottom: 1px solid #bbb;
+                        box-shadow   : 
+                            -1px 0 0 rgba(255, 255, 255, 0.8) inPianoKeyboard, 
+                            0 0 5px #ccc inPianoKeyboard, 
+                            0 0 3px rgba(0, 0, 0, 0.2)
+                        ;
+                        z-index      : 3;
+
+                        &.active {
+                            @include linear-gradient(
+                                to bottom, 
+                                #fff 0%, 
+                                #e9e9e9 100%
+                            );
+                            border-top   : 1px solid #777;
+                            border-left  : 1px solid #999;
+                            border-bottom: 1px solid #999;
+                            box-shadow   : 
+                                2px 0 3px rgba(0, 0, 0, 0.1) inPianoKeyboard, 
+                                -5px 5px 20px rgba(0, 0, 0, 0.2) inPianoKeyboard, 
+                                0 0 3px rgba(0, 0, 0, 0.2)
+                            ;
+        
+                            &.left-hand {
+                                background-color: map-deep-get($white-key, colors, left-hand, full-opacity);
+                            }
+            
+                            &.right-hand {
+                                background-color: map-deep-get($white-key, colors, right-hand, full-opacity);
+                            }
+                        }
+
+                        span {
+                            color: rgba(0, 0, 0, 0.2);
+                        }
+                    }
+                        
+                    div {
+                        &[data-quadrant="1"] .key { 
+                            &first-child {
+                                border-radius: 5px 0 5px 5px;
+                            }
+                        }
+                            
+                        &[data-quadrant="3"] .key {
+                            &last-child {
+                                border-radius: 0 5px 5px 5px;
+                            }
+                        }
+                    }
+                }
+                    
+                .black-keys {
+                    @extend .transparent-scrollbar;
+                    @extend .x-scrollable-container;
+                    padding : 0;
+                    width   : 100%;
+                    height  : 120px;
+                    position: absolute;
+                    z-index : 4;
+        
+                    .key {
+                        @include linear-gradient(45deg, #222 0%, #555 100%);
+                        height       : map-get($black-key, key-height);
+                        width        : map-get($black-key, key-width);
+                        border       : 1px solid #000;
+                        border-radius: 0 0 5px 5px;
+                        box-shadow   : 
+                            -1px -1px 2px rgba(255, 255, 255, 0.2) inPianoKeyboard, 
+                            0 -5px 2px 3px rgba(0, 0, 0, 0.6) inPianoKeyboard, 
+                            0 2px 4px rgba(0, 0, 0, 0.5)
+                        ;
+                        font-size    : 0.8em;
+        
+                        &.active {
+                            @include linear-gradient(to right, #444 0%, #222 100%);
+                            box-shadow: 
+                                -1px -1px 2px rgba(255, 255, 255, 0.2) inPianoKeyboard, 
+                                0 -2px 2px 3px rgba(0, 0, 0, 0.6) inPianoKeyboard, 
+                                0 1px 2px rgba(0, 0, 0, 0.5)
+                            ;
+        
+                            &.left-hand {
+                                background-color: map-deep-get($black-key, colors, left-hand, full-opacity);
+                            }
+        
+                            &.right-hand {
+                                background-color: map-deep-get($black-key, colors, right-hand, full-opacity);
+                            }   
+                        }
+
+                        span {
+                            color: whitesmoke;
+                        }
+                    }
+
+                    div {
+                        &[data-quadrant="1"] .key {
+                            &:first-child {
+                                margin-left: 45px;
+                            }
+                        
+                            &:nth-child(2), &:nth-child(3), &:last-child {
+                                margin-left: 31px;
+                            }
+                            
+                            &:nth-child(4) {
+                                margin-left: 90px;
+                            }
+                        }
+                            
+                        &[data-quadrant="2"] .key {
+                            &:first-child {
+                                margin-left: 88px;
+                            }
+                            
+                            &:nth-child(2), &:nth-child(3), &:last-child {
+                                margin-left: 31px;
+                            }
+                            
+                            &:nth-child(4) {
+                                margin-left: 88px;
+                            }
+                        }
+                            
+                        &[data-quadrant="3"] .key {
+                            &:first-child {
+                                margin-left: 90px;
+                            }
+                            
+                            &:nth-child(2), &:nth-child(3), &:last-child {
+                                margin-left: 31px;
+                            }
+                            
+                            &:nth-child(4) {
+                                margin-left: 90px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

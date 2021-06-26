@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header.jsx";
 import PianoGame from "./PianoGame.jsx";
 import GameSettings from "./GameSettings.jsx";
-import 'semantic-ui-css/semantic.min.css'
+import en from "../en/index.jsx";
 
 class App extends React.Component {
     constructor() {
@@ -11,21 +11,29 @@ class App extends React.Component {
             ready: false, // Ready to play. - Pronto(a) para jogar.
             showModal: false,
             songSpeed: 1,
-            helpingHand: "none",
+            helpingHand: "left",
             songName: null,
-            playerName: null
+            pianoModel: null,
+            lang: "pt"
         };
     }
 
-    startGame = (speed, helpingHand, song, player) => {
+    startGame = (speed, helpingHand, song, piano) => {
         this.setState({
             ready: true,
             showModal: false, 
             songSpeed: parseFloat(speed),
             helpingHand: helpingHand,
             songName: song,
-            playerName: player
+            pianoModel: piano
         });
+    }
+
+    translate = text => ((this.state.lang === "en")? en[text] : text);
+
+    // Switch app language. - Trocar o idioma do app.    
+    setLang = lang => {
+        window.location.href = `${(window.location.href).replace(/\?lang=\w{2}/g, "")}?lang=${lang}`; 
     }
 
     // Close game settings. - Fechar as configurações do jogo.
@@ -34,35 +42,53 @@ class App extends React.Component {
     // Open game settings. - Abrir as configurações do jogo.
     openModal = () => this.setState({ showModal: true });
 
+    componentDidMount() {
+        let url = window.location.href;
+        let lang = url.match(/pt|en/);
+
+        lang = (lang == null)? "pt" : lang[0];
+
+        this.setState({ lang: lang });
+    }
+
     render() {
         const { 
             closeModal, 
             openModal, 
-            startGame
+            startGame,
+            translate,
+            setLang
         } = this;
 
-        const { 
+        const {
+            lang, 
             showModal, 
             ready, 
             songSpeed, 
             helpingHand,
             songName,
-            playerName
+            pianoModel
         } = this.state;
 
         const props = {
             header: {
-                open: openModal
+                open: openModal,
+                setLang: setLang,
+                tr: translate,
+                lang: lang
             },
             gameSettings: {
                 close: closeModal,
-                start: startGame
+                start: startGame,
+                tr: translate
             },
             pianoGame: { 
-                song: songName,
-                speed: songSpeed,
+                songName: songName,
+                songSpeed: songSpeed,
                 helpingHand: helpingHand,
-                player: playerName
+                pianoModel: pianoModel,
+                setLang: setLang,
+                tr: translate
             }
         }
 

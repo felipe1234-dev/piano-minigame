@@ -1,0 +1,30 @@
+.transparent-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    
+    /* width */
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: transparent; 
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: transparent;
+
+        /* Handle on hover */
+        &:hover {
+            background: transparent; 
+        }  
+    }
+}
+
+.x-scrollable-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+}
